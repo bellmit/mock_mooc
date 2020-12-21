@@ -9,6 +9,9 @@
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
 
+        <!-- overwrite mapper.xml -->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
+
         <!-- toString()method -->
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
 
