@@ -19,7 +19,7 @@ export default new Router({
     path: '/admin',
     component: Admin,
     children: [{
-      path: 'welcome',
+      path: 'welcome', // no "/"
       component: Welcome,
     }]
   }]
