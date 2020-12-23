@@ -8,6 +8,9 @@ create table `chapter`
 ) engine = innodb
   default charset = utf8mb4;
 
+insert into `chapter` (`id`, `course_id`, `name`)
+values ('000000', '000000', 'chapter1');
+
 #test
 drop table if exists `test`;
 create table `test`
