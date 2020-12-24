@@ -10,6 +10,9 @@ create table `chapter`
 
 insert into `chapter` (`id`, `course_id`, `name`)
 values ('000000', '000000', 'chapter1');
+insert into `chapter` (`id`, `course_id`, `name`)
+values ('111111', '111111', 'chapter2
+');
 
 #test
 drop table if exists `test`;
