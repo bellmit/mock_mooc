@@ -17,13 +17,16 @@ export default new Router({
     path: '/login',
     component: Login
   }, {
-    path: '/admin',
+    path: '/',
+    name: 'admin',
     component: Admin,
     children: [{
       path: 'welcome', // no "/"
+      name: 'welcome',
       component: Welcome,
     }, {
       path: 'business/chapter',
+      name: 'business/chapter',
       component: Chapter,
     }]
   }]
