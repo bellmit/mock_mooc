@@ -52,15 +52,15 @@ export default {
       type: Function,
       default: null
     },
-    itemCount: Number //显示的页码数，比如总共有100页，只显示10页，其它用省略号表示
+    itemCount: Number //page number to show. E.g., there are 100 pages in total, show only 10 page numbers
   },
   data: function () {
     return {
-      total: 0, // 总行数
-      size: 10, // 每页条数
-      page: 0, // 当前页码
-      pageTotal: 0, // 总页数
-      pages: [] // 显示的页码数组
+      total: 0, // total items
+      size: 10, // size of items on each page
+      page: 0, // current page number
+      pageTotal: 0, // total page numbers
+      pages: [] // page numbers to show
     }
   },
   methods: {
@@ -97,7 +97,11 @@ export default {
     },
 
     /**
-     * 当前要显示在页面上的页码
+     * page numbers to show
+     * @param total: pageTotal
+     * @param current: current page
+     * @param length: how many pages to show
+     * @returns {[]}
      */
     getPageItems(total, current, length) {
       let items = [];
@@ -106,12 +110,13 @@ export default {
           items.push(i);
         }
       } else {
-        let base = 0;
-        if (current - base > Math.floor((length - 1) / 2)) {
-          base = Math.min(total, current - base + Math.ceil((length - 1) / 2)) - length;
+        let start = 0;
+        if (current - 0 > Math.floor((length - 1) / 2)) {
+          start = Math.min(total, current - 0 + Math.ceil((length - 1) / 2)) - length;
+          console.log('start', start)
         }
-        for (let i = 0; i <= length; i++) {
-          items.push(base + i);
+        for (let i = 1; i <= length; i++) {
+          items.push(start + i);
         }
       }
       return items;

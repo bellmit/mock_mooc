@@ -1,10 +1,16 @@
 <template>
   <div>
     <p>
-      <button v-on:click="list()" class="btn btn-white btn-default btn-round">
+      <button v-on:click="add()" class="btn btn-white btn-default btn-round">
+        <i class="ace-icon fa fa-edit"></i>
+        Add chapter
+      </button>
+      &nbsp;
+      <button v-on:click="list(1)" class="btn btn-white btn-default btn-round">
         <i class="ace-icon fa fa-refresh red2"></i>
         Refresh
       </button>
+
     </p>
 
     <pagination ref="pagination" v-bind:list="list" v-bind:itemCount=5></pagination>
@@ -81,6 +87,35 @@
 
       </tbody>
     </table>
+
+    <div class="modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">New chapter</h4>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label>name</label>
+                <input class="form-control" placeholder="chapter name">
+              </div>
+              <div class="form-group">
+                <label>course id</label>
+                <input class="form-control" placeholder="course id">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary">Save</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
   </div>
 
 </template>
@@ -102,6 +137,10 @@ export default {
     _this.list(1);
   },
   methods: {
+    add() {
+      //let _this = this;
+      $(".modal").modal("show");
+    },
     list(page) {
       let _this = this;
       _this.$ajax.post('http://127.0.0.1:9000/business/admin/chapter/list', {
