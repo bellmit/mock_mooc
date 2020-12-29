@@ -132,6 +132,7 @@ export default {
             if (resp.success) {
               $("#form-modal").modal("hide");
               _this.list(1);
+              toast.success("A new item has been successfully saved!")
             }
           })
     },
@@ -154,11 +155,7 @@ export default {
                 let resp = response.data
                 if (resp.success) {
                   _this.list(1);
-                  Swal.fire(
-                      'Deleted!',
-                      'Your file has been deleted.',
-                      'success'
-                  )
+                  toast.success("You deleted an item!")
                 }
               })
         }
