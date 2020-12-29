@@ -100,17 +100,17 @@
             <form>
               <div class="form-group">
                 <label>name</label>
-                <input class="form-control" placeholder="chapter name">
+                <input v-model="chapter.name" class="form-control" placeholder="chapter name">
               </div>
               <div class="form-group">
                 <label>course id</label>
-                <input class="form-control" placeholder="course id">
+                <input v-model="chapter.courseId" class="form-control" placeholder="course id">
               </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary">Save</button>
+            <button v-on:click="save()" type="button" class="btn btn-primary">Save</button>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
@@ -128,6 +128,7 @@ export default {
   name: "chapter",
   data: function () {
     return {
+      chapter:{}, //new chapter
       chapters: []
     }
   },
@@ -141,6 +142,7 @@ export default {
       //let _this = this;
       $(".modal").modal("show");
     },
+
     list(page) {
       let _this = this;
       _this.$ajax.post('http://127.0.0.1:9000/business/admin/chapter/list', {
@@ -151,6 +153,16 @@ export default {
             console.log('chapter result: ', response);
             _this.chapters = response.data.list;
             _this.$refs.pagination.render(page, response.data.total);
+          })
+    },
+
+    save(){
+      let _this = this;
+      _this.$ajax.post('http://127.0.0.1:9000/business/admin/chapter/save',
+        _this.chapter
+      )
+          .then((response) => {
+            console.log('saved chapter: ', response);
           })
     }
   }
