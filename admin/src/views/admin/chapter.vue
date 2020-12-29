@@ -109,11 +109,13 @@ export default {
 
     list(page) {
       let _this = this;
+      Loading.show();
       _this.$ajax.post('http://127.0.0.1:9000/business/admin/chapter/list', {
         page: page,
         size: _this.$refs.pagination.size
       })
           .then((response) => {
+            Loading.hide();
             console.log('chapter result: ', response);
             let resp = response.data;
             _this.chapters = resp.content.list;
@@ -123,10 +125,12 @@ export default {
 
     save() {
       let _this = this;
+      Loading.show();
       _this.$ajax.post('http://127.0.0.1:9000/business/admin/chapter/save',
           _this.chapter
       )
           .then((response) => {
+            Loading.hide();
             console.log('saved chapter: ', response);
             let resp = response.data
             if (resp.success) {
@@ -149,8 +153,10 @@ export default {
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {
+          Loading.show();
           _this.$ajax.delete('http://127.0.0.1:9000/business/admin/chapter/delete/' + id)
               .then((response) => {
+                Loading.hide();
                 console.log('deleted chapter: ', response);
                 let resp = response.data
                 if (resp.success) {
