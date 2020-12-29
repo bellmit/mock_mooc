@@ -6,6 +6,7 @@ import com.course.server.dto.ChapterDto;
 import com.course.server.dto.PageDto;
 import com.course.server.mapper.ChapterMapper;
 import com.course.server.util.CopyUtil;
+import com.course.server.util.UuidUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
@@ -42,6 +43,7 @@ public class ChapterService {
     public void save(ChapterDto chapterDto){
 //        Chapter chapter = new Chapter();
 //        BeanUtils.copyProperties(chapterDto, chapter);
+        chapterDto.setId(UuidUtil.getShortUuid());
         Chapter chapter = CopyUtil.copy(chapterDto, Chapter.class);
         chapterMapper.insert(chapter);
 

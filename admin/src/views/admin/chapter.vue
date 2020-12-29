@@ -88,7 +88,7 @@
       </tbody>
     </table>
 
-    <div class="modal fade" tabindex="-1" role="dialog">
+    <div id="form-modal" class="modal fade" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -140,7 +140,7 @@ export default {
   methods: {
     add() {
       //let _this = this;
-      $(".modal").modal("show");
+      $("#form-modal").modal("show");
     },
 
     list(page) {
@@ -151,8 +151,9 @@ export default {
       })
           .then((response) => {
             console.log('chapter result: ', response);
-            _this.chapters = response.data.list;
-            _this.$refs.pagination.render(page, response.data.total);
+            let resp = response.data;
+            _this.chapters = resp.content.list;
+            _this.$refs.pagination.render(page, resp.content.total);
           })
     },
 
@@ -163,6 +164,11 @@ export default {
       )
           .then((response) => {
             console.log('saved chapter: ', response);
+            let resp = response.data
+            if(resp.success){
+              $("#form-modal").modal("hide");
+              _this.list(1);
+            }
           })
     }
   }
