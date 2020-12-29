@@ -136,37 +136,26 @@ export default {
             if (resp.success) {
               $("#form-modal").modal("hide");
               _this.list(1);
-              toast.success("A new item has been successfully saved!")
+              Toast.success("A new item has been successfully saved!")
             }
           })
     },
 
     del(id) {
       let _this = this;
-      Swal.fire({
-        title: 'Are you sure to delete this item?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Loading.show();
-          _this.$ajax.delete('http://127.0.0.1:9000/business/admin/chapter/delete/' + id)
-              .then((response) => {
-                Loading.hide();
-                console.log('deleted chapter: ', response);
-                let resp = response.data
-                if (resp.success) {
-                  _this.list(1);
-                  toast.success("You deleted an item!")
-                }
-              })
-        }
+      Confirm.show("The deleted chapter cannot be reverted!", function () {
+        Loading.show();
+        _this.$ajax.delete('http://127.0.0.1:9000/business/admin/chapter/delete/' + id)
+            .then((response) => {
+              Loading.hide();
+              console.log('deleted chapter: ', response);
+              let resp = response.data
+              if (resp.success) {
+                _this.list(1);
+                Toast.success("You deleted an item!")
+              }
+            })
       })
-
     }
   }
 }
