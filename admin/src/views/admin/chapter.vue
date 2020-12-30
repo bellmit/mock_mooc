@@ -143,6 +143,8 @@ export default {
               $("#form-modal").modal("hide");
               _this.list(1);
               Toast.success("A new item has been successfully saved!")
+            } else {
+              Toast.warning(resp.message);
             }
           })
     },

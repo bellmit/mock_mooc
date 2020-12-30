@@ -4,6 +4,7 @@ import com.course.server.dto.ChapterDto;
 import com.course.server.dto.PageDto;
 import com.course.server.dto.ResponseDto;
 import com.course.server.service.ChapterService;
+import com.course.server.util.ValidatorUtil;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -25,6 +26,11 @@ public class ChapterController {
 
     @PostMapping("/save")
     public ResponseDto save(@RequestBody ChapterDto chapterDto) {
+        //validation
+        ValidatorUtil.require(chapterDto.getName(), "chapter name");
+        ValidatorUtil.require(chapterDto.getCourseId(), "course id");
+        ValidatorUtil.length(chapterDto.getCourseId(), "course id", 1, 8);
+
         ResponseDto responseDto = new ResponseDto();
         chapterService.save(chapterDto);
         responseDto.setContent(chapterDto);
