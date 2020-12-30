@@ -116,7 +116,6 @@ export default {
       })
           .then((response) => {
             Loading.hide();
-            console.log('chapter result: ', response);
             let resp = response.data;
             _this.chapters = resp.content.list;
             _this.$refs.pagination.render(page, resp.content.total);
@@ -137,7 +136,6 @@ export default {
       )
           .then((response) => {
             Loading.hide();
-            console.log('saved chapter: ', response);
             let resp = response.data
             if (resp.success) {
               $("#form-modal").modal("hide");
@@ -156,7 +154,6 @@ export default {
         _this.$ajax.delete('http://127.0.0.1:9000/business/admin/chapter/delete/' + id)
             .then((response) => {
               Loading.hide();
-              console.log('deleted chapter: ', response);
               let resp = response.data
               if (resp.success) {
                 _this.list(1);
