@@ -1,6 +1,5 @@
 package com.course.server.dto;
 
-// 数据传输层
 // almost same as domain.chapter, can be modified according to business requirements
 public class ChapterDto {
     private String id;
