@@ -21,6 +21,23 @@ insert into `chapter` (`id`, `course_id`, `name`) values ('000009', '000009', 'c
 insert into `chapter` (`id`, `course_id`, `name`) values ('000010', '000010', 'chapter10');
 insert into `chapter` (`id`, `course_id`, `name`) values ('000011', '000011', 'chapter11');
 
+drop table if exists `section`;
+create table `section` (
+    `id` char(8) not null default '',
+    `title` varchar(50) not null,
+    `course_id` char(8) comment 'course.id',
+    `chapter_id` char(8) comment 'chapter.id',
+    `video` varchar(200),
+    `time` int comment 'video duration',
+    `charge` char(1) comment 'C charged, F free',
+    `sort` int,
+    `created_at` datetime(3),
+    `updated_at` datetime(3),
+    primary key (`id`)
+) engine=InnoDB default charset=utf8mb4;
+insert into `section` (id,title,course_id,chapter_id,video,time,charge,sort,created_at,updated_at)
+values ('00000001','section01','00000001','00000000','',500,'F',1,now(),now());
+
 #test
 drop table if exists `test`;
 create table `test`
