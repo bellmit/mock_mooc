@@ -9,16 +9,22 @@ import java.util.Map;
 
 public class ServerGenerator {
 
+    static String MODULE = "business";
+
     static String toServicePath = "./server/src/main/java/com/course/server/service/";
 
-    static String toControllerPath = "./business/src/main/java/com/course/business/controller/admin/";
+    static String toControllerPath = "./"+MODULE+"/src/main/java/com/course/"+MODULE+"/controller/admin/";
 
     public static void main(String[] args) throws IOException, TemplateException {
         String Domain = "Section";
         String domain = "section";
+        String tableName = "section";
+        String module = MODULE;
         Map<String, Object> map = new HashMap<>();
         map.put("Domain", Domain);
         map.put("domain", domain);
+        map.put("tableName", tableName);
+        map.put("module", module);
 
         //service
         FreemarkerUtil.initConfig("service.ftl");
