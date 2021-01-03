@@ -1,9 +1,10 @@
 package com.course.business.controller.admin;
 
+import com.course.server.dto.SectionDto;
 import com.course.server.dto.PageDto;
 import com.course.server.dto.ResponseDto;
-import com.course.server.dto.SectionDto;
 import com.course.server.service.SectionService;
+import com.course.server.util.ValidatorUtil;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

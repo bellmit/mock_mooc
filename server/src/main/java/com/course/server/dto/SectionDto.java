@@ -1,26 +1,21 @@
 package com.course.server.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class SectionDto {
     private String id;
-
     private String title;
-
     private String courseId;
-
     private String chapterId;
-
     private String video;
-
     private Integer time;
-
     private String charge;
-
     private Integer sort;
-
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+2")
     private Date createdAt;
-
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+2")
     private Date updatedAt;
 
     public String getId() {
@@ -102,6 +97,7 @@ public class SectionDto {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
+
 
     @Override
     public String toString() {
