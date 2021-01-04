@@ -124,6 +124,18 @@ export default {
     save() {
       let _this = this;
       //validation
+      if(1 != 1
+      <#list fieldList as field>
+        <#if field.nullable>
+        || !Validator.require(_this.${domain}.${field.nameHump}, "${field.name}")
+        </#if>
+        <#if (field.length>0)>
+        || !Validator.length(_this.${domain}.${field.nameHump}, "${field.name}", 1, ${field.length})
+        </#if>
+      </#list>
+      ) {
+        return;
+      }
 
       Loading.show();
       _this.$ajax.post(process.env.VUE_APP_SERVER + '/${module}/admin/${domain}/save',

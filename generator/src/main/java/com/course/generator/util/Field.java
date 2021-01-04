@@ -6,7 +6,11 @@ public class Field {
     private String nameBigHump; //CourseId
     private String tableName; //course
     private String type; //char(8)
-    private  String javaType; //String
+    private String javaType; //String
+
+    private Boolean nullable;
+    private Integer length;
+
 
 
     public String getName() {
@@ -55,6 +59,22 @@ public class Field {
 
     public void setJavaType(String javaType) {
         this.javaType = javaType;
+    }
+
+    public Boolean getNullable() {
+        return nullable;
+    }
+
+    public void setNullable(Boolean nullable) {
+        this.nullable = nullable;
+    }
+
+    public Integer getLength() {
+        return length;
+    }
+
+    public void setLength(Integer length) {
+        this.length = length;
     }
 
 }

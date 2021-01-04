@@ -28,8 +28,15 @@ public class ${Domain}Controller {
 
     @PostMapping("/save")
     public ResponseDto save(@RequestBody ${Domain}Dto ${domain}Dto) {
-        //TODO: validation
-
+        //validation
+        <#list fieldList as field>
+            <#if !field.nullable>
+        ValidatorUtil.require(${domain}Dto.get${field.nameBigHump}(), "${field.name}");
+            </#if>
+            <#if (field.length > 0)>
+        ValidatorUtil.length(${domain}Dto.get${field.nameBigHump}(), "${field.name}", 1, ${field.length});
+            </#if>
+        </#list>
 
         ResponseDto responseDto = new ResponseDto();
         ${domain}Service.save(${domain}Dto);

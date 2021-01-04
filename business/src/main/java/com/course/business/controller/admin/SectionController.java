@@ -28,8 +28,10 @@ public class SectionController {
 
     @PostMapping("/save")
     public ResponseDto save(@RequestBody SectionDto sectionDto) {
-        //TODO: validation
-
+        //validation
+        ValidatorUtil.require(sectionDto.getTitle(), "title");
+        ValidatorUtil.length(sectionDto.getTitle(), "title", 1, 50);
+        ValidatorUtil.length(sectionDto.getVideo(), "video", 1, 200);
 
         ResponseDto responseDto = new ResponseDto();
         sectionService.save(sectionDto);

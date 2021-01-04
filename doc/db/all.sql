@@ -52,3 +52,5 @@ insert into `test` (`id`, `name`)
 values (1, 'tester');
 insert into `test` (`id`, `name`)
 values (2, 'tester2');
+
+show full columns from section;
