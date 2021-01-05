@@ -8,7 +8,7 @@ public class ValidatorUtil {
     /**
      * validate emptiness
      */
-    public static void require(String str, String filedName) {
+    public static void require(Object str, String filedName) {
         if (StringUtils.isEmpty(str)) {
             throw new ValidatorException(filedName + " cannot be empty");
         }

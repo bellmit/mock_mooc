@@ -35,7 +35,7 @@ public class ${Domain}Controller {
         ValidatorUtil.require(${domain}Dto.get${field.nameBigHump}(), "${field.name}");
             </#if>
             <#if (field.length > 0)>
-        ValidatorUtil.length(${domain}Dto.get${field.nameBigHump}(), "${field.name}", 1, ${field.length});
+        ValidatorUtil.length(${domain}Dto.get${field.nameBigHump}(), "${field.name}", 1, ${field.length?c});
             </#if>
         </#if>
         </#list>
