@@ -11,6 +11,8 @@ public class Field {
     private Boolean nullable;
     private Integer length;
 
+    private Boolean isEnum = false;
+    private String enumConst = ""; //such as COURSE_LEVEL
 
 
     public String getName() {
@@ -42,7 +44,7 @@ public class Field {
     }
 
     public void setTableName(String tableName) {
-        this. tableName= tableName;
+        this.tableName = tableName;
     }
 
     public String getType() {
@@ -77,4 +79,35 @@ public class Field {
         this.length = length;
     }
 
+    public Boolean getEnum() {
+        return isEnum;
+    }
+
+    public void setEnum(Boolean anEnum) {
+        this.isEnum = anEnum;
+    }
+
+    public String getEnumConst() {
+        return enumConst;
+    }
+
+    public void setEnumConst(String enumConst) {
+        this.enumConst = enumConst;
+    }
+
+    @Override
+    public String toString() {
+        return "Field{" +
+                "name='" + name + '\'' +
+                ", nameHump='" + nameHump + '\'' +
+                ", nameBigHump='" + nameBigHump + '\'' +
+                ", tableName='" + tableName + '\'' +
+                ", type='" + type + '\'' +
+                ", javaType='" + javaType + '\'' +
+                ", nullable=" + nullable +
+                ", length=" + length +
+                ", isEnum=" + isEnum +
+                ", enumConst='" + enumConst + '\'' +
+                '}'+"\n";
+    }
 }

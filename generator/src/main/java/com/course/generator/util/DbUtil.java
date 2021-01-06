@@ -1,5 +1,7 @@
 package com.course.generator.util;
 
+import com.course.generator.vue.EnumGenerator;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,7 @@ public class DbUtil {
                 String columnName = rs.getString("Field");
                 String type = rs.getString("Type");
                 String nullable = rs.getString("Null");
+                String comment = rs.getString("Comment");
                 Field field = new Field();
                 field.setName(columnName);
                 field.setNameHump(lineToHump(columnName));
@@ -42,12 +45,25 @@ public class DbUtil {
                 field.setJavaType(DbUtil.sqlTypeToJavaType(type));
 
                 field.setNullable("YES".equals(nullable));
-                if(type.toUpperCase().contains("varchar".toUpperCase())){
-                    String lengthStr = type.substring(type.indexOf("(")+1, type.length()-1);
+                if (type.toUpperCase().contains("varchar".toUpperCase())) {
+                    String lengthStr = type.substring(type.indexOf("(") + 1, type.length() - 1);
                     field.setLength(Integer.valueOf(lengthStr));
                 } else {
                     field.setLength(0);
                 }
+
+                if (comment.contains("enum")) {
+                    field.setEnum(true);
+
+                    //e.g. get COURSE_LEVEL from enum|[CourseLevelEnum]
+                    int start = comment.indexOf("[");
+                    int end = comment.indexOf("]");
+                    String enumName = comment.substring(start + 1, end);
+                    String enumConst = EnumGenerator.toUnderLine(enumName);
+                    field.setEnumConst(enumConst);
+                    System.out.println(field);
+                }
+
                 fieldList.add(field);
             }
         }

@@ -45,6 +45,7 @@ public class VueGenerator {
         map.put("module", module);
         map.put("fieldList", fieldList);
         map.put("typeSet", typeSet);
+        System.out.println(map.get("fieldList"));
 
         //vue
         FreemarkerUtil.initConfig("vue.ftl");

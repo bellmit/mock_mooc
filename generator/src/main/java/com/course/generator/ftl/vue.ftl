@@ -18,8 +18,8 @@
     <table id="simple-table" class="table table-bordered table-hover">
       <thead>
       <tr><#list fieldList as field>
-      <#if field.nameHump!="createdAt" && field.nameHump!="updatedAt">
-      <th>${field.name}</th>
+      <#if field.getNameHump()!="createdAt" && field.getNameHump()!="updatedAt">
+      <th>${field.getName()}</th>
       </#if>
       </#list>
       <th>operations</th>
@@ -30,8 +30,12 @@
       <tbody>
       <tr v-for="${domain} in ${domain}s">
         <#list fieldList as field>
-        <#if field.nameHump!="createdAt" && field.nameHump!="updatedAt">
-        <td>{{${domain}.${field.nameHump}}}</td>
+        <#if field.getNameHump()!="createdAt" && field.getNameHump()!="updatedAt">
+          <#if field.getEnum()>
+        <td>{{${field.getEnumConst()} | optionKV(${domain}.${field.getNameHump()})}}</td>
+          <#else>
+        <td>{{${domain}.${field.getNameHump()}}}</td>
+          </#if>
         </#if>
         </#list>
         <td>
@@ -59,12 +63,20 @@
           <div class="modal-body">
             <form class="form-horizontal">
               <#list fieldList as field>
-              <#if field.name!="id" && field.nameHump!="createdAt" && field.nameHump!="updatedAt">
+              <#if field.getName()!="id" && field.getNameHump()!="createdAt" && field.getNameHump()!="updatedAt">
               <div class="form-group">
-                <label>${field.name}</label>
+                <label>${field.getName()}</label>
+                <#if field.getEnum()>
                 <div col-sm-10>
-                  <input v-model="${domain}.${field.nameHump}" class="form-control">
+                  <select v-model="${domain}.${field.getNameHump()}" class="form-control">
+                    <option v-for="o in ${field.getEnumConst()}" v-bind:value="o.key">{{o.value}}</option>
+                  </select>
                 </div>
+                <#else>
+                <div col-sm-10>
+                  <input v-model="${domain}.${field.getNameHump()}" class="form-control">
+                </div>
+                </#if>
               </div>
               </#if>
               </#list>
@@ -91,7 +103,12 @@ export default {
   data: function () {
     return {
       ${domain}: {}, //new chapter
-      ${domain}s: []
+      ${domain}s: [],
+      <#list fieldList as field>
+        <#if field.getEnum()>
+      ${field.getEnumConst()}: ${field.getEnumConst()},
+        </#if>
+      </#list>
     }
   },
   mounted: function () {
@@ -132,12 +149,12 @@ export default {
       //validation
       if(1 != 1
       <#list fieldList as field>
-        <#if field.name!="id" && field.nameHump!="createdAt" && field.nameHump!="updatedAt">
+        <#if field.getName()!="id" && field.getNameHump()!="createdAt" && field.getNameHump()!="updatedAt">
         <#if field.nullable>
-        || !Validator.require(_this.${domain}.${field.nameHump}, "${field.name}")
+        || !Validator.require(_this.${domain}.${field.getNameHump()}, "${field.getName()}")
         </#if>
         <#if (field.length>0)>
-        || !Validator.length(_this.${domain}.${field.nameHump}, "${field.name}", 1, ${field.length?c})
+        || !Validator.length(_this.${domain}.${field.getNameHump()}, "${field.getName()}", 1, ${field.length?c})
         </#if>
         </#if>
       </#list>
