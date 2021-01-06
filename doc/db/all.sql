@@ -35,7 +35,7 @@ create table `chapter`
 insert into `chapter` (`id`, `course_id`, `name`)
 values ('000000', '00000001', 'chapter00');
 insert into `chapter` (`id`, `course_id`, `name`)
-values ('000001', '00000001', 'chapter01');
+values ('00000001', '00000001', 'chapter01');
 insert into `chapter` (`id`, `course_id`, `name`)
 values ('000002', '000002', 'chapter02');
 insert into `chapter` (`id`, `course_id`, `name`)
@@ -75,7 +75,7 @@ create table `section`
 ) engine = InnoDB
   default charset = utf8mb4;
 insert into `section` (id, title, course_id, chapter_id, video, time, charge, sort, created_at, updated_at)
-values ('00000001', 'section01', '00000001', '00000000', '', 500, 'F', 1, now(), now());
+values ('00000001', 'section01', '00000001', '00000001', '', 500, 'F', 1, now(), now());
 
 #test
 drop table if exists `test`;
