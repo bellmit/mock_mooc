@@ -33,9 +33,9 @@ create table `chapter`
   default charset = utf8mb4;
 
 insert into `chapter` (`id`, `course_id`, `name`)
-values ('000000', '000000', 'chapter00');
+values ('000000', '00000001', 'chapter00');
 insert into `chapter` (`id`, `course_id`, `name`)
-values ('000001', '000001', 'chapter01');
+values ('000001', '00000001', 'chapter01');
 insert into `chapter` (`id`, `course_id`, `name`)
 values ('000002', '000002', 'chapter02');
 insert into `chapter` (`id`, `course_id`, `name`)
