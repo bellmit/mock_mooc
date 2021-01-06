@@ -8,6 +8,7 @@ import com.course.server.util.ValidatorUtil;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 @RequestMapping("/admin/category")
@@ -17,6 +18,14 @@ public class CategoryController {
 
     @Resource
     private CategoryService categoryService;
+
+    @PostMapping("/all")
+    public ResponseDto all() {
+        ResponseDto responseDto = new ResponseDto();
+        List<CategoryDto> categoryDtoList = categoryService.all();
+        responseDto.setContent(categoryDtoList);
+        return responseDto;
+    }
 
     @PostMapping("/list")
     public ResponseDto list(@RequestBody PageDto pageDto) {
