@@ -5,6 +5,7 @@ import com.course.server.domain.CourseExample;
 import com.course.server.dto.CourseDto;
 import com.course.server.dto.PageDto;
 import com.course.server.mapper.CourseMapper;
+import com.course.server.mapper.my.MyCourseMapper;
 import com.course.server.util.CopyUtil;
 import com.course.server.util.UuidUtil;
 import com.github.pagehelper.PageHelper;
@@ -13,14 +14,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
-import java.util.List;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class CourseService {
 
     @Resource
     private CourseMapper courseMapper;
+
+    @Resource
+    private MyCourseMapper myCourseMapper;
 
     public void list(PageDto pageDto) {
         PageHelper.startPage(pageDto.getPage(), pageDto.getSize());
@@ -64,12 +68,19 @@ public class CourseService {
      * @param course
      */
     private void update(Course course) {
-        Date now = new Date();        
+        Date now = new Date();
         course.setUpdatedAt(now);
         courseMapper.updateByPrimaryKey(course);
     }
 
     public void delete(String id) {
         courseMapper.deleteByPrimaryKey(id);
+    }
+
+    /**
+     * update course duration
+     */
+    public void updateTime(String courseId) {
+        myCourseMapper.updateTime(courseId);
     }
 }
