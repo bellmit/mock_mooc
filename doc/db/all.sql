@@ -130,6 +130,16 @@ insert into `category` (id, parent, name, sort) values ('00000701', '00000700', 
 insert into `category` (id, parent, name, sort) values ('00000702', '00000700', 'redis', 702);
 insert into `category` (id, parent, name, sort) values ('00000703', '00000700', 'mongodb', 703);
 
+-- course category
+drop table if exists `courseCategory`;
+create table `courseCategory` (
+                                   `id` char(8) not null default '' comment 'id',
+                                   `course_id` char(8) comment 'course.id',
+                                   `category_id` char(8) comment 'course.id',
+                                   primary key (`id`)
+) engine=innodb default charset=utf8mb4;
+
+select*from courseCategory;
 
 #test
 drop table if exists `test`;
