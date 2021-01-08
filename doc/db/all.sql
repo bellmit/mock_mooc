@@ -141,6 +141,15 @@ create table `courseCategory` (
 
 select*from courseCategory;
 
+-- course content (1-1 relationship with course, separate from course because content
+-- will be very long)
+drop table if exists `courseContent`;
+create table `courseContent` (
+                                  `id` char(8) not null default '' comment 'course id',
+                                  `content` mediumtext not null,
+                                  primary key (`id`)
+) engine=innodb default charset=utf8mb4;
+
 #test
 drop table if exists `test`;
 create table `test`
