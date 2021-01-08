@@ -1,9 +1,12 @@
 package com.course.server.service;
 
 import com.course.server.domain.Course;
+import com.course.server.domain.CourseContent;
 import com.course.server.domain.CourseExample;
+import com.course.server.dto.CourseContentDto;
 import com.course.server.dto.CourseDto;
 import com.course.server.dto.PageDto;
+import com.course.server.mapper.CourseContentMapper;
 import com.course.server.mapper.CourseMapper;
 import com.course.server.mapper.my.MyCourseMapper;
 import com.course.server.util.CopyUtil;
@@ -26,6 +29,9 @@ public class CourseService {
 
     @Resource
     private MyCourseMapper myCourseMapper;
+
+    @Resource
+    private CourseContentMapper courseContentMapper;
 
     @Resource
     private CourseCategoryService courseCategoryService;
@@ -90,5 +96,29 @@ public class CourseService {
      */
     public void updateTime(String courseId) {
         myCourseMapper.updateTime(courseId);
+    }
+
+    /**
+     * search course content
+     * @param id course id
+     */
+    public CourseContentDto findContent(String id) {
+        CourseContent content = courseContentMapper.selectByPrimaryKey(id);
+        if (content == null) {
+            return null;
+        }
+        return CopyUtil.copy(content, CourseContentDto.class);
+    }
+
+    /**
+     * save course content
+     */
+    public int saveContent(CourseContentDto courseContentDto) {
+        CourseContent courseContent = CopyUtil.copy(courseContentDto, CourseContent.class);
+        int i = courseContentMapper.updateByPrimaryKeyWithBLOBs(courseContent);
+        if (i == 0) {
+            i = courseContentMapper.insert(courseContent);
+        }
+        return i;
     }
 }
