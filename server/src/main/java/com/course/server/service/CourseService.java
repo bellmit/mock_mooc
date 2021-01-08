@@ -6,6 +6,7 @@ import com.course.server.domain.CourseExample;
 import com.course.server.dto.CourseContentDto;
 import com.course.server.dto.CourseDto;
 import com.course.server.dto.PageDto;
+import com.course.server.dto.SortDto;
 import com.course.server.mapper.CourseContentMapper;
 import com.course.server.mapper.CourseMapper;
 import com.course.server.mapper.my.MyCourseMapper;
@@ -58,8 +59,8 @@ public class CourseService {
             this.update(course);
         }
 
-        //save categorys to courseCategory
-        courseCategoryService.saveBatch(courseDto.getId(), courseDto.getCategorys());
+        //save course categories to courseCategory
+        courseCategoryService.saveBatch(course.getId(), courseDto.getCategorys());
     }
 
     /**
@@ -100,6 +101,7 @@ public class CourseService {
 
     /**
      * search course content
+     *
      * @param id course id
      */
     public CourseContentDto findContent(String id) {
@@ -120,5 +122,22 @@ public class CourseService {
             i = courseContentMapper.insert(courseContent);
         }
         return i;
+    }
+
+    /**
+     * sort course
+     *
+     * @param sortDto
+     */
+    public void sort(SortDto sortDto) {
+        myCourseMapper.updateSort(sortDto);
+
+        if (sortDto.getNewSort() > sortDto.getOldSort()) {
+            myCourseMapper.moveSortsForward(sortDto);
+        }
+
+        if (sortDto.getNewSort() < sortDto.getOldSort()) {
+            myCourseMapper.moveSortsBackward(sortDto);
+        }
     }
 }

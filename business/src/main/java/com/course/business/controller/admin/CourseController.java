@@ -35,7 +35,6 @@ public class CourseController {
         ValidatorUtil.require(courseDto.getName(), "name");
         ValidatorUtil.length(courseDto.getName(), "name", 1, 50);
         ValidatorUtil.length(courseDto.getSummary(), "summary", 1, 2000);
-        ValidatorUtil.length(courseDto.getImage(), "image", 1, 100);
 
         ResponseDto responseDto = new ResponseDto();
         courseService.save(courseDto);
@@ -58,7 +57,7 @@ public class CourseController {
         return responseDto;
     }
 
-    @PostMapping("/find-content/{id}")
+    @GetMapping("/find-content/{id}")
     public ResponseDto findContent(@PathVariable String id) {
         ResponseDto responseDto = new ResponseDto();
         CourseContentDto courseContentDto = courseService.findContent(id);
@@ -70,6 +69,13 @@ public class CourseController {
     public ResponseDto saveContent(@RequestBody CourseContentDto courseContentDto) {
         ResponseDto responseDto = new ResponseDto();
         courseService.saveContent(courseContentDto);
+        return responseDto;
+    }
+
+    @PostMapping("/sort")
+    public ResponseDto sort(@RequestBody SortDto sortDto){
+        ResponseDto responseDto = new ResponseDto();
+        courseService.sort(sortDto);
         return responseDto;
     }
 }
