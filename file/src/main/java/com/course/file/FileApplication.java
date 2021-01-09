@@ -22,6 +22,6 @@ public class FileApplication {
         SpringApplication app = new SpringApplication(FileApplication.class);
         Environment env = app.run(args).getEnvironment();
         LOG.info("Successfully started");
-        LOG.info("File address: \thttp:/127.0.0.1:{}", env.getProperty("file.port"));
+        LOG.info("File address: \thttp:/127.0.0.1:{}", env.getProperty("server.port"));
     }
 }
