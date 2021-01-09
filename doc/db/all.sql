@@ -150,6 +150,16 @@ create table `courseContent` (
                                   primary key (`id`)
 ) engine=innodb default charset=utf8mb4;
 
+-- teacher
+drop table if exists `teacher`;
+create table `teacher` (
+                           `id` char(8) not null default '' comment 'id',
+                           `name` varchar(50) not null,
+                           `image` varchar(100),
+                           `intro` varchar(500),
+                           primary key (`id`)
+) engine=innodb default charset=utf8mb4;
+
 #test
 drop table if exists `test`;
 create table `test`
