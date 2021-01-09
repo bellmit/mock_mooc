@@ -2,8 +2,8 @@ package com.course.server.service;
 
 import com.course.server.domain.Teacher;
 import com.course.server.domain.TeacherExample;
-import com.course.server.dto.TeacherDto;
 import com.course.server.dto.PageDto;
+import com.course.server.dto.TeacherDto;
 import com.course.server.mapper.TeacherMapper;
 import com.course.server.util.CopyUtil;
 import com.course.server.util.UuidUtil;
@@ -64,5 +64,13 @@ public class TeacherService {
 
     public void delete(String id) {
         teacherMapper.deleteByPrimaryKey(id);
+    }
+
+    public List<TeacherDto> all() {
+        TeacherExample teacherExample = new TeacherExample();
+        List<Teacher> teacherList = teacherMapper.selectByExample(teacherExample);
+        List<TeacherDto> teacherDtoList = CopyUtil.copyList(teacherList, TeacherDto.class);
+        return teacherDtoList;
+
     }
 }

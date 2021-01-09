@@ -160,6 +160,9 @@ create table `teacher` (
                            primary key (`id`)
 ) engine=innodb default charset=utf8mb4;
 
+# add techer_id column to course table
+alter table `course` add column (`teacher_id` char(8) comment 'teacher.id');
+
 #test
 drop table if exists `test`;
 create table `test`
