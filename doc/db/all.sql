@@ -163,6 +163,7 @@ create table `teacher` (
 # add techer_id column to course table
 alter table `course` add column (`teacher_id` char(8) comment 'teacher.id');
 
+select * from teacher;
 #test
 drop table if exists `test`;
 create table `test`
