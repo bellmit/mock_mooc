@@ -27,7 +27,7 @@ public class UploadController {
         //save file to local
         String fileName = file.getOriginalFilename();
         String key = UuidUtil.getShortUuid();
-        String fullPath = "/home/luoyumo/Desktop/file/imooc/teacher/" + key + "-" + fileName;
+        String fullPath = "/home/luoyumo/Desktop/file/imooc/course/teacher/" + key + "-" + fileName;
         File dest = new File(fullPath);
         file.transferTo(dest);
         LOG.info(dest.getAbsolutePath());
