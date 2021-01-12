@@ -2,8 +2,8 @@ package com.course.server.enums;
 
 public enum FileUseEnum {
 
-    COURSE("C", "teacher"),
-    TEACHER("T", "course");
+    COURSE("C", "course"),
+    TEACHER("T", "teacher");
 
     private String code;
     private String desc;
@@ -29,11 +29,17 @@ public enum FileUseEnum {
         this.desc = desc;
     }
 
-    @Override
-    public String toString() {
-        return "FileUseEnum{" +
-                "code='" + code + '\'' +
-                ", desc='" + desc + '\'' +
-                '}';
-    }
+    /**
+     *
+     * @param code
+     * @return e.g. COURSE("C", "course"),
+     */
+   public static FileUseEnum getByCode(String code){
+        for(FileUseEnum e: FileUseEnum.values()){
+            if(e.getCode().equals(code)){
+                return e;
+            }
+        }
+        return null;
+   }
 }
