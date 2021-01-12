@@ -11,7 +11,7 @@ import java.io.File;
 import java.util.*;
 
 public class VueGenerator {
-    static String MODULE = "business";
+    static String MODULE = "file";
 
     static String toVuePath = "/home/luoyumo/Desktop/mooc_frontend/admin/src/views/admin/";
 

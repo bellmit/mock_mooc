@@ -1,10 +1,7 @@
 package com.course.generator.vue;
 
 import com.course.generator.util.FreemarkerUtil;
-import com.course.server.enums.CourseChargeEnum;
-import com.course.server.enums.CourseLevelEnum;
-import com.course.server.enums.CourseStatusEnum;
-import com.course.server.enums.SectionChargeEnum;
+import com.course.server.enums.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,6 +20,7 @@ public class EnumGenerator {
         insert(CourseChargeEnum.class);
         insert(CourseLevelEnum.class);
         insert(CourseStatusEnum.class);
+        insert(FileUseEnum.class);
         Map<String, Object> map = new HashMap<>();
         map.put("objectList", objectList);
 

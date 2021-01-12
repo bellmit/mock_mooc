@@ -164,6 +164,21 @@ create table `teacher` (
 alter table `course` add column (`teacher_id` char(8) comment 'teacher.id');
 
 select * from teacher;
+
+# file
+drop table if exists `file`;
+create table `file` (
+                        `id` char(8) not null default '',
+                        `path` varchar(100) not null comment 'relative path',
+                        `name` varchar(100) comment 'file name',
+                        `suffix` varchar(10),
+                        `size` int comment 'Byte',
+                        `use` char(1) comment 'enum|[FileUseEnum]:COURSE("C", "teacher"), TEACHER("T", "course")',
+                        `created_at` datetime(3),
+                        `updated_at` datetime(3),
+                        primary key (`id`),
+                        unique key `path_unique` (`path`)
+) engine=innodb default charset=utf8mb4;
 #test
 drop table if exists `test`;
 create table `test`
