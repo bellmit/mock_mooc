@@ -21,6 +21,17 @@ create table course
 insert into course(id, name, summary, time, price, image, level, charge, status, enroll, sort, created_at, updated_at)
 values ('00000001', 'course01', 'this is a test course', 7200, 19.9, '', 1, 'C', 'D', 100, 0, now(), now());
 
+-- course content file
+drop table if exists `courseContentFile`;
+create table `courseContentFile` (
+                                       `id` char(8) not null default '' comment 'id',
+                                       `course_id` char(8) not null comment 'course id',
+                                       `url` varchar(100) comment 'full path',
+                                       `name` varchar(100),
+                                       `size` int comment 'byte',
+                                       primary key (`id`)
+) engine=innodb default charset=utf8mb4 comment='file in course content';
+
 -- chapter
 drop table if exists `chapter`;
 create table `chapter`
@@ -165,7 +176,7 @@ alter table `course` add column (`teacher_id` char(8) comment 'teacher.id');
 
 select * from teacher;
 
-# file
+-- file
 drop table if exists `file`;
 create table `file` (
                         `id` char(8) not null default '',
@@ -179,7 +190,8 @@ create table `file` (
                         primary key (`id`),
                         unique key `path_unique` (`path`)
 ) engine=innodb default charset=utf8mb4;
-#test
+
+-- test
 drop table if exists `test`;
 create table `test`
 (

@@ -44,10 +44,11 @@
 <!--        <table tableName="chapter" domainObjectName="Chapter"/>-->
 <!--        <table tableName="section" domainObjectName="Section"/>-->
 <!--        <table tableName="course" domainObjectName="Course"/>-->
+        <table tableName="courseContentFile" domainObjectName="CourseContentFile"/>
 <!--        <table tableName="category" domainObjectName="Category"/>-->
 <!--        <table tableName="courseCategory" domainObjectName="CourseCategory"/>-->
 <!--        <table tableName="courseContent" domainObjectName="CourseContent"/>-->
 <!--        <table tableName="teacher" domainObjectName="Teacher"/>-->
-        <table tableName="file" domainObjectName="File"/>
+<!--        <table tableName="file" domainObjectName="File"/>-->
     </context>
 </generatorConfiguration>
