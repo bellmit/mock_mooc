@@ -8,14 +8,13 @@ import com.course.server.util.UuidUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 @RequestMapping("/admin")
@@ -73,5 +72,46 @@ public class UploadController {
         fileDto.setPath(FILE_DOMAIN + path);
         responseDto.setContent(fileDto);
         return responseDto;
+    }
+
+    /**
+     * merge file shards
+     *
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/merge")
+    public ResponseDto merge() throws Exception {
+        File newFile = new File(FILE_PATH + "/course/test123.mp4");
+        FileOutputStream outputStream = new FileOutputStream(newFile, true); // append file
+        FileInputStream fileInputStream = null;
+        byte[] byt = new byte[10 * 1024];
+        int len;
+
+        try {
+            //first shard
+            fileInputStream = new FileInputStream(new File(FILE_PATH + "/course/dhjpshvW.blob"));
+            while ((len = fileInputStream.read(byt)) != -1) {
+                outputStream.write(byt, 0, len);
+            }
+
+            //second shard
+            fileInputStream = new FileInputStream(new File(FILE_PATH + "/course/aaaaaaaa.blob"));
+            while ((len = fileInputStream.read(byt)) != -1) {
+                outputStream.write(byt, 0, len);
+            }
+        } catch (IOException e) {
+            LOG.error("failed to merge shards", e);
+        } finally {
+            try {
+                if (fileInputStream != null) {
+                    fileInputStream.close();
+                }
+                outputStream.close();
+            } catch (Exception e) {
+                LOG.error("failed to close stream", e);
+            }
+        }
+        return new ResponseDto();
     }
 }
