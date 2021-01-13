@@ -191,6 +191,12 @@ create table `file` (
                         unique key `path_unique` (`path`)
 ) engine=innodb default charset=utf8mb4;
 
+alter table `file` add column (`shard_index` int comment 'uploaded shards');
+alter table `file` add column (`shard_size` int comment 'Byte');
+alter table `file` add column (`shard_total` int comment 'total number of shards');
+alter table `file` add column (`key` varchar(32));
+alter table `file` add unique key key_unique (`key`);
+
 -- test
 drop table if exists `test`;
 create table `test`

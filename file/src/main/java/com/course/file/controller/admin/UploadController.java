@@ -83,21 +83,22 @@ public class UploadController {
     @GetMapping("/merge")
     public ResponseDto merge() throws Exception {
         File newFile = new File(FILE_PATH + "/course/test123.mp4");
-        FileOutputStream outputStream = new FileOutputStream(newFile, true); // append file
+        FileOutputStream outputStream = new FileOutputStream(newFile, true); // append to the end
         FileInputStream fileInputStream = null;
-        byte[] byt = new byte[10 * 1024];
+        byte[] byt = new byte[100 * 1024];
         int len;
 
         try {
             //first shard
-            fileInputStream = new FileInputStream(new File(FILE_PATH + "/course/dhjpshvW.blob"));
+            fileInputStream = new FileInputStream(new File(FILE_PATH + "/course/Oxx7l72D.mp4"));
             while ((len = fileInputStream.read(byt)) != -1) {
                 outputStream.write(byt, 0, len);
             }
 
             //second shard
-            fileInputStream = new FileInputStream(new File(FILE_PATH + "/course/aaaaaaaa.blob"));
+            fileInputStream = new FileInputStream(new File(FILE_PATH + "/course/WxlrsZf2.mp4"));
             while ((len = fileInputStream.read(byt)) != -1) {
+                LOG.info("second file");
                 outputStream.write(byt, 0, len);
             }
         } catch (IOException e) {
@@ -109,7 +110,7 @@ public class UploadController {
                 }
                 outputStream.close();
             } catch (Exception e) {
-                LOG.error("failed to close stream", e);
+                LOG.error("failed to close IO stream", e);
             }
         }
         return new ResponseDto();
