@@ -197,7 +197,8 @@ alter table `file` add column (`shard_total` int comment 'total number of shards
 alter table `file` add column (`key` varchar(32));
 alter table `file` add unique key key_unique (`key`);
 
-select*from file;
+delete from file where id='wwrxd5zZ';
+select * from file;
 
 -- test
 drop table if exists `test`;
